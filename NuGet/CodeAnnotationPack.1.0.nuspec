@@ -6,6 +6,7 @@
     <title>Code Annotation Pack</title>
     <authors>Jakob Christensen</authors>
     <description>Additional support for code annotations. Highlight method parameters, returns values and properties without code annotations. Quick Fix for applying code annotation attributes and assertions.</description>
+    <projectUrl>https://github.com/JakobChristensen/Resharper.CodeAnnotations</projectUrl>
     <copyright>Copyright &#x00A9; Jakob Christensen</copyright>
     <tags>Code Annotation</tags>
     <dependencies>
