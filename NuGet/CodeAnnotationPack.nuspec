@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>CodeAnnotationPack</id>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <title>Code Annotation Pack</title>
     <authors>Jakob Christensen</authors>
     <description>Additional support for code annotations. Highlight method parameters, returns values and properties without code annotations. Quick Fix for applying code annotation attributes and assertions.</description>
