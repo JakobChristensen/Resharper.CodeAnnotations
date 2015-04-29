@@ -13,16 +13,14 @@ namespace CodeAnnotationPack.CodeAnnotations
   using System.Linq;
   using CodeAnnotationPack.Options;
   using JetBrains.Annotations;
-  using JetBrains.Application;
   using JetBrains.DocumentModel;
-  using JetBrains.ReSharper.Daemon.Impl;
-  using JetBrains.ReSharper.Daemon.Stages;
   using JetBrains.ReSharper.Daemon.Stages.Dispatcher;
+  using JetBrains.ReSharper.Feature.Services.Daemon;
   using JetBrains.ReSharper.Psi.CSharp.Tree;
-  using JetBrains.ReSharper.Psi.Modules;
   using JetBrains.ReSharper.Psi.Tree;
+  using JetBrains.ReSharper.Resources.Shell;
 
-  /// <summary>
+	/// <summary>
   /// Defines the AttributeAnalyzer class.
   /// </summary>
   [ElementProblemAnalyzer(new[]
