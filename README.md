@@ -15,3 +15,4 @@ A great article on www.elegantcode.com that explains why it is better not to pas
 
 http://elegantcode.com/2010/05/01/say-no-to-null/
 
+**A big thank you to maestroMike for porting this plugin to Resharper 9.1!**
