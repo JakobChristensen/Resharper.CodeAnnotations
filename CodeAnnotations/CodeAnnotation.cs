@@ -12,12 +12,12 @@ namespace CodeAnnotationPack.CodeAnnotations
   using System;
   using System.Collections.Generic;
   using JetBrains.Annotations;
-  using JetBrains.ReSharper.Daemon;
+  using JetBrains.ReSharper.Feature.Services.Daemon;
   using JetBrains.ReSharper.Psi;
   using JetBrains.ReSharper.Psi.CodeAnnotations;
   using JetBrains.ReSharper.Psi.ControlFlow;
-  using JetBrains.ReSharper.Psi.ControlFlow.CSharp;
   using JetBrains.ReSharper.Psi.ControlFlow.Impl;
+  using JetBrains.ReSharper.Psi.CSharp.ControlFlow;
   using JetBrains.ReSharper.Psi.CSharp.Tree;
   using JetBrains.ReSharper.Psi.Resolve;
   using JetBrains.ReSharper.Psi.Tree;
@@ -301,17 +301,14 @@ namespace CodeAnnotationPack.CodeAnnotations
 
       // return CodeAnnotationAttribute.NotNull;
       AllNonQualifiedReferencesResolver.ProcessAll(function);
-      var graf = CSharpControlFlowBuilder.Build(function);
+      var builder = new CSharpControlFlowBuilder();
+      var graf = builder.GraphFromNode(function, null, true) as ICSharpControlFlowGraph;
       if (graf == null)
       {
         return CodeAnnotationAttribute.Undefined;
       }
 
-      var result = graf.Inspect(HighlightingSettingsManager.Instance.GetValueAnalysisMode(projectFile));
-      if (result == null)
-      {
-        return CodeAnnotationAttribute.Undefined;
-      }
+      var result = graf.Inspect(ValueAnalysisMode.OPTIMISTIC);
 
       switch (result.SuggestReturnValueAnnotationAttribute)
       {
@@ -384,17 +381,14 @@ namespace CodeAnnotationPack.CodeAnnotations
         return CodeAnnotationAttribute.Undefined;
       }
 
-      var graf = CSharpControlFlowBuilder.Build(functionDeclaration);
+      var builder = new CSharpControlFlowBuilder();
+      var graf = builder.GraphFromNode(functionDeclaration, null, true) as ICSharpControlFlowGraph;
       if (graf == null)
       {
         return CodeAnnotationAttribute.Undefined;
       }
 
-      var inspect = graf.Inspect(HighlightingSettingsManager.Instance.GetValueAnalysisMode(projectFile));
-      if (inspect == null)
-      {
-        return CodeAnnotationAttribute.Undefined;
-      }
+      var inspect = graf.Inspect(ValueAnalysisMode.OPTIMISTIC);
 
       var position = this.FindPosition(graf.BodyElement.Children, statement);
       if (position == null)

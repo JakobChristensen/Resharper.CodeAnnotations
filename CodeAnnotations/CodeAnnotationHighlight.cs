@@ -8,13 +8,12 @@ namespace CodeAnnotationPack.CodeAnnotations
 {
   using JetBrains.Annotations;
   using JetBrains.DocumentModel;
-  using JetBrains.ReSharper.Daemon;
-  using JetBrains.ReSharper.Daemon.CSharp.Errors;
-  using JetBrains.ReSharper.Daemon.Impl;
+  using JetBrains.ReSharper.Feature.Services.CSharp.Daemon;
+  using JetBrains.ReSharper.Feature.Services.Daemon;
 
-  /// <summary>Defines the <see cref="CodeAnnotationHighlight"/> class.</summary>
+	/// <summary>Defines the <see cref="CodeAnnotationHighlight"/> class.</summary>
   [ConfigurableSeverityHighlighting("CodeAnnotationAnalyzer", "CSHARP", OverlapResolve = OverlapResolveKind.WARNING, ToolTipFormatString = "Add NotNull or CanBeNull attributes [Code Annotation Pack]")]
-  public class CodeAnnotationHighlight : CSharpHighlightingBase, IHighlightingWithRange
+  public class CodeAnnotationHighlight : CSharpHighlightingBase, IHighlighting
   {
     #region Constructors and Destructors
 
@@ -104,7 +103,7 @@ namespace CodeAnnotationPack.CodeAnnotations
     /// Calculates the range.
     /// </summary>
     /// <returns>Returns the document range.</returns>
-    DocumentRange IHighlightingWithRange.CalculateRange()
+    public DocumentRange CalculateRange()
     {
       return this.Range;
     }
