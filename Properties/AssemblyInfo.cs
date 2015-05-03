@@ -22,6 +22,6 @@ using JetBrains.ReSharper.Feature.Services.Daemon;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.4.0")]
+[assembly: AssemblyFileVersion("1.0.7.0")]
 
 [assembly: RegisterConfigurableSeverity("CodeAnnotationAnalyzer", null, "CodeSmell", "Add NotNull or CanBeNull attributes [Code Annotation Pack]", "\n          Add either [NotNull] or [CanBeNull] attributes to parameters and possible return value.\n        ", Severity.SUGGESTION, false, Internal = false)]
