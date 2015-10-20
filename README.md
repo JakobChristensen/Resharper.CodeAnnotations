@@ -1,8 +1,10 @@
+*** DISCONTINUED ***
+
 Resharper.CodeAnnotations
 =========================
 
 _This ReSharper plugin has been discontinued. You can have similar functionality by using this Analyzer in Visual Studio 2015:
-https://github.com/JakobChristensen/NotNullAttributes_
+https://github.com/bkoelman/ResharperCodeContractNullability
 
 Additional support for code annotations. 
 
