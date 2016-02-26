@@ -535,7 +535,6 @@ namespace CodeAnnotationPack.CodeAnnotations
         if (parameter.Code.EndsWith(text) || text.EndsWith(parameter.Code))
         {
           return parameter;
-          break;
         }
 
         var parameterDeclaration = parameter.Parameter;

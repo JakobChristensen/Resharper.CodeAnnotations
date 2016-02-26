@@ -185,7 +185,7 @@ namespace CodeAnnotationPack.CodeAnnotations
 
     /// <summary>The format body.</summary>
     /// <param name="body">The body.</param>
-    private void FormatBody([NotNull] IBlock body)
+    private void FormatBody(IBlock body)
     {
       if (!body.IsPhysical())
       {
