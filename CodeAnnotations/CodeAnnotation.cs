@@ -18,6 +18,7 @@ namespace CodeAnnotationPack.CodeAnnotations
   using JetBrains.ReSharper.Psi.ControlFlow;
   using JetBrains.ReSharper.Psi.ControlFlow.Impl;
   using JetBrains.ReSharper.Psi.CSharp.ControlFlow;
+  using JetBrains.ReSharper.Psi.CSharp.Impl.ControlFlow;
   using JetBrains.ReSharper.Psi.CSharp.Tree;
   using JetBrains.ReSharper.Psi.Resolve;
   using JetBrains.ReSharper.Psi.Tree;
@@ -299,18 +300,17 @@ namespace CodeAnnotationPack.CodeAnnotations
         return CodeAnnotationAttribute.Undefined;
       }
 
-      // return CodeAnnotationAttribute.NotNull;
-      AllNonQualifiedReferencesResolver.ProcessAll(function);
+			// return CodeAnnotationAttribute.NotNull;
+	  new AllNonQualifiedSignatureReferencesResolver().Process(function);
       var builder = new CSharpControlFlowBuilder();
-      var graf = builder.GraphFromNode(function, null, true) as ICSharpControlFlowGraph;
-      if (graf == null)
+      var graph = builder.GraphFromNode(function, null, true) as ICSharpControlFlowGraph;
+      if (graph == null)
       {
         return CodeAnnotationAttribute.Undefined;
       }
 
-      var result = graf.Inspect(ValueAnalysisMode.OPTIMISTIC);
-
-      switch (result.SuggestReturnValueAnnotationAttribute)
+	  var graphInspector = CSharpControlFlowGraphInspector.Inspect(graph, ValueAnalysisMode.OPTIMISTIC);
+	  switch (graphInspector.SuggestReturnValueAnnotationAttribute)
       {
         case CSharpControlFlowNullReferenceState.NOT_NULL:
           return CodeAnnotationAttribute.NotNull;
@@ -382,15 +382,15 @@ namespace CodeAnnotationPack.CodeAnnotations
       }
 
       var builder = new CSharpControlFlowBuilder();
-      var graf = builder.GraphFromNode(functionDeclaration, null, true) as ICSharpControlFlowGraph;
-      if (graf == null)
+      var graph = builder.GraphFromNode(functionDeclaration, null, true) as ICSharpControlFlowGraph;
+      if (graph == null)
       {
         return CodeAnnotationAttribute.Undefined;
       }
 
-      var inspect = graf.Inspect(ValueAnalysisMode.OPTIMISTIC);
+	  var graphInspector = CSharpControlFlowGraphInspector.Inspect(graph, ValueAnalysisMode.OPTIMISTIC);
 
-      var position = this.FindPosition(graf.BodyElement.Children, statement);
+      var position = this.FindPosition(graph.BodyElement.Children, statement);
       if (position == null)
       {
         return CodeAnnotationAttribute.Undefined;
@@ -402,7 +402,7 @@ namespace CodeAnnotationPack.CodeAnnotations
         return CodeAnnotationAttribute.Undefined;
       }
 
-      var result = inspect.GetVariableStateAt(position, declaredElement);
+      var result = graphInspector.GetVariableStateAt(position, declaredElement);
       switch (result)
       {
         case CSharpControlFlowNullReferenceState.NOT_NULL:

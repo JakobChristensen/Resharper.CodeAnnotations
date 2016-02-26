@@ -149,7 +149,7 @@ namespace CodeAnnotationPack.CodeAnnotations
       var psiServices = treeNode.GetPsiServices();
       var context = treeNode.GetResolveContext();
 
-      var attributesSet = psiServices.Symbols.GetModuleAttributes(psiModule, context);
+      var attributesSet = psiServices.Symbols.GetModuleAttributes(psiModule);
       if (attributesSet == null)
       {
         return;
